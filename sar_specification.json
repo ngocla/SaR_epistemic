@@ -1,0 +1,7 @@
+{
+    "domain" : "searchandrescue_domain2.epddl",
+    "problem": "searchandrescue_prob2_tight.epddl",
+    "action-type-libraries": [
+        "intermediate.epddl"
+    ]
+}
