@@ -1,4 +1,4 @@
-(define (problem recon-sar-p1)
+(define (problem recon-sar-has-fire)
   (:domain reconnaissance-search-and-rescue)
 
   (:requirements
@@ -23,45 +23,49 @@
     A1
   )
 
-  ;; Static/common facts
   (:facts-init
     (adjacent l0 l1)
     (adjacent l0 l2)
     (adjacent l1 l0)
     (adjacent l2 l0)
-    
+
     (is-drone D1)
     (is-ambulance A1)
     (is-firefighter F1)
   )
 
-    
-
   (:init
     (:and
-      ; 0. facts, including groundtruth:
-      (at D1 l0) (at F1 l0) (at A1 l0) (victim-at l2)
+      (at D1 l0)
+      (at F1 l0)
+      (at A1 l0)
+      (victim-at l2)
+      (not (fire-at l0))
+      (not (fire-at l1))
+      (fire-at l2)
+      (not (rescued-victim))
+
       (forall (?i - agent ?l1 ?l2 - location | (/= ?l1 ?l2))
-        (and 
+        (and
           (imply (at ?i ?l1) (not (at ?i ?l2)))
           (imply (victim-at ?l1) (not (victim-at ?l2)))))
-      
 
-      ; commonly know by all agents
       ([C. All] (and
-        (at D1 l0) (at F1 l0) (at A1 l0)
+        (at D1 l0)
+        (at F1 l0)
+        (at A1 l0)
+        (not (fire-at l0))
+        (not (rescued-victim))
         (forall (?i - agent ?l1 ?l2 - location | (/= ?l1 ?l2))
-          (and 
+          (and
             (imply (at ?i ?l1) (not (at ?i ?l2)))
             (imply (victim-at ?l1) (not (victim-at ?l2)))))
-        
       ))
     )
   )
 
   (:goal
     (and
-      ;;([C. All] (victim-at l2))
       (rescued-victim)
     )
   )
