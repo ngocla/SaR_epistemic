@@ -1,0 +1,112 @@
+(define (problem sar-doxastic-hidden-victim-fire)
+  (:domain Search-and-Rescue-doxastic)
+
+  (:requirements
+    :typing
+    :equality
+    :facts
+    :partial-observability
+    :multi-pointed-models
+    :modal-goals
+    :common-knowledge
+    :list-comprehensions
+    :KD45-frames
+  )
+
+  (:objects
+    l0 l1 l2 - location
+  )
+
+  (:agents
+    D1
+    F1
+    A1
+  )
+
+  (:facts-init
+    (adjacent l0 l1)
+    (adjacent l0 l2)
+    (adjacent l1 l0)
+    (adjacent l2 l0)
+
+    (is-drone D1)
+    (is-ambulance A1)
+    (is-firefighter F1)
+  )
+
+  ;; Explicit KD45-style initial state.
+  ;; Actual world is w2_fire: victim at l2 and fire at l2.
+  ;; D1 is initially uncertain over all worlds.
+  ;; F1 initially has a false belief that l2 is safe.
+  ;; A1 initially has a false belief that l2 is safe.
+  (:init
+    :worlds (w1_fire w1_safe w2_fire w2_safe)
+
+    :relations
+    (
+      ;; Drone uncertainty: universal relation, still S5, therefore also KD45.
+      D1 (:forall (?w ?v - world) (?w ?v))
+
+      ;; Firefighter belief: all worlds point to w2_safe.
+      F1 (:and
+        (w1_fire w2_safe)
+        (w1_safe w2_safe)
+        (w2_fire w2_safe)
+        (w2_safe w2_safe)
+      )
+
+      ;; Ambulance false belief: all worlds point to w2_safe.
+      ;; From actual w2_fire, A1 believes no fire is at l2.
+      A1 (:and
+        (w1_fire w2_safe)
+        (w1_safe w2_safe)
+        (w2_fire w2_safe)
+        (w2_safe w2_safe)
+      )
+    )
+
+    :labels
+    (
+      w1_fire
+      (:and
+        (at D1 l0)
+        (at F1 l0)
+        (at A1 l0)
+        (victim-at l1)
+        (fire-at l1)
+      )
+
+      w1_safe
+      (:and
+        (at D1 l0)
+        (at F1 l0)
+        (at A1 l0)
+        (victim-at l1)
+      )
+
+      ;; actual world
+      w2_fire
+      (:and
+        (at D1 l0)
+        (at F1 l0)
+        (at A1 l0)
+        (victim-at l2)
+        (fire-at l2)
+      )
+
+      w2_safe
+      (:and
+        (at D1 l0)
+        (at F1 l0)
+        (at A1 l0)
+        (victim-at l2)
+      )
+    )
+
+    :designated (w2_fire)
+  )
+
+  (:goal
+    (rescued-victim)
+  )
+)
