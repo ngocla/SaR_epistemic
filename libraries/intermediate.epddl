@@ -25,6 +25,19 @@
                      ?nil (:trivial-event) )
     )
 
+    (:action-type nondeterministic-public-ontic
+        :events (?success ?fail)
+        :observability-types (Fully)
+        :relations
+            (Fully (:and
+            (?success ?success)
+            (?fail ?fail)
+            ))
+        :designated (?success ?fail)
+        :conditions (?success (:non-trivial-postconditions)
+                     ?fail (:trivial-postconditions))
+        )
+
     ;--------------------SENSING------------------
 
     (:action-type public-sensing
