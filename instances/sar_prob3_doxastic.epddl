@@ -1,5 +1,5 @@
 (define (problem sar-doxastic-hidden-victim-fire)
-  (:domain Search-and-Rescue-doxastic)
+  (:domain Search-and-Rescue)
 
   (:requirements
     :typing

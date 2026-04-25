@@ -1,5 +1,5 @@
-(define (problem recon-sar-has-fire)
-  (:domain reconnaissance-search-and-rescue)
+(define (problem sar-has-fire)
+  (:domain Search-and-Rescue)
 
   (:requirements
     :typing

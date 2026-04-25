@@ -2,7 +2,7 @@
 ;; Domain
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define (domain Search-and-Rescue-doxastic)
+(define (domain Search-and-Rescue)
   (:action-type-libraries intermediate)
 
   (:requirements
