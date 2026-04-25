@@ -18,4 +18,4 @@ Use domain *sar_domain_intermediate.epddl* with more types of actions. It works 
 - Problem 3 (sar_prob3_doxastic.epddl): 3 agents as previous problems, in which drone D1 has no belief and knowledge in victim and fire locations. Firefighter F1 and ambulance A1 has false belief that l2 is safe but in fact there is fire at l2.
 
 ## Hard level:
-Use domain *sar_domain_intermediate.epddl* with non-deterministic action for extinguishing fire. It compiles with problem 1, 2, and 3.
+Use domain *sar_domain_hard.epddl* with include non-deterministic action for extinguishing fire. It compiles with problem 1, 2, and 3.
